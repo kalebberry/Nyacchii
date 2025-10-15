@@ -31,7 +31,11 @@ const Illustration = ({ characterArt, backgroundArt }) => {
 						<img onClick={() => openLightboxOnSlide(5)} src={background[0].fields.file.url} />
 						<img onClick={() => openLightboxOnSlide(6)} src={background[1].fields.file.url} />
 						<img onClick={() => openLightboxOnSlide(7)} src={background[2].fields.file.url} />
+<<<<<<< HEAD
 						<img onClick={() => openLightboxOnSlide(7)} src={background[3].fields.file.url} />
+=======
+						<img onClick={() => openLightboxOnSlide(8)} src={background[3].fields.file.url} />
+>>>>>>> main
 					</div>
 					<FsLightbox
 						toggler={lightboxController.toggler}
