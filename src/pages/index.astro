@@ -1,6 +1,7 @@
 ---
 import Layout from '@/Layouts/DefaultLayout.astro';
 import tokens from '../design-tokens/tokens.json';
+import InteractiveCounter from '@/components/vue/landing/InteractiveCounter.vue';
 
 const title = 'Studio Eien — Web Design';
 const description = 'A clean, black‑and‑white anime landing page built with your CSS grid system.';
@@ -345,61 +346,55 @@ const baseColors = tokens.color.base;
 		</section>
 
 		<!-- Optional Vue mount for interactivity demos -->
-		<section class='container flow'>
-			<div id='interactive-counter' class='card--bw' style='padding:1rem'>
-				<p class='fs-step-00' style='opacity:.75; margin:0'>
-					Vue mount ready: <code>#interactive-counter</code>
-				</p>
-			</div>
+		<section id='colors' class='container flow'>
+			<InteractiveCounter client:visible />
 		</section>
-		<!-- Your existing Vue bundle can be hooked here if needed -->
-		<script type='module' src='/src/hydrate/landing.ts'></script>
 	</main>
-</Layout>
-<script>
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	<script>
+		import gsap from 'gsap';
+		import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-	gsap.registerPlugin(ScrollTrigger);
+		gsap.registerPlugin(ScrollTrigger);
 
-	document.addEventListener('DOMContentLoaded', () => {
-		// --- 1. Hero Entrance Animation ---
-		const hero = document.querySelector('.hero--bw');
-		if (hero) {
-			const heroTl = gsap.timeline({
-				defaults: { duration: 0.9, ease: 'power3.out', opacity: 0, y: 20 },
-			});
+		document.addEventListener('DOMContentLoaded', () => {
+			// --- 1. Hero Entrance Animation ---
+			const hero = document.querySelector('.hero--bw');
+			if (hero) {
+				const heroTl = gsap.timeline({
+					defaults: { duration: 0.9, ease: 'power3.out', opacity: 0, y: 20 },
+				});
 
-			heroTl
-				.from(hero.querySelector('h1'), {})
-				.from(hero.querySelector('p'), {}, '-=0.6')
-				.from(hero.querySelector('nav'), {}, '-=0.6')
-				.from(
-					hero.querySelectorAll('.poster-grid .poster'),
-					{ stagger: 0.1, scale: 0.95 },
-					'-=0.7'
-				);
-		}
+				heroTl
+					.from(hero.querySelector('h1'), {})
+					.from(hero.querySelector('p'), {}, '-=0.6')
+					.from(hero.querySelector('nav'), {}, '-=0.6')
+					.from(
+						hero.querySelectorAll('.poster-grid .poster'),
+						{ stagger: 0.1, scale: 0.95 },
+						'-=0.7'
+					);
+			}
 
-		// --- 2. Staggered Animation for All Content Sections on Scroll ---
-		const animatedSections = gsap.utils.toArray('section[id]');
+			// --- 2. Staggered Animation for All Content Sections on Scroll ---
+			const animatedSections = gsap.utils.toArray('section[id]');
 
-		animatedSections.forEach((section) => {
-			// Select all direct children or specific elements you want to animate
-			const elementsToAnimate = gsap.utils.toArray(section.children);
+			animatedSections.forEach((section) => {
+				// Select all direct children or specific elements you want to animate
+				const elementsToAnimate = gsap.utils.toArray(section.children);
 
-			gsap.from(elementsToAnimate, {
-				y: 20,
-				opacity: 0,
-				duration: 0.9,
-				ease: 'power3.out',
-				stagger: 0.5,
-				scrollTrigger: {
-					trigger: section,
-					start: 'top 85%',
-					once: true,
-				},
+				gsap.from(elementsToAnimate, {
+					y: 20,
+					opacity: 0,
+					duration: 0.9,
+					ease: 'power3.out',
+					stagger: 0.5,
+					scrollTrigger: {
+						trigger: section,
+						start: 'top 85%',
+						once: true,
+					},
+				});
 			});
 		});
-	});
-</script>
+	</script>
+</Layout>
