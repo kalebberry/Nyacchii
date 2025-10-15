@@ -1,0 +1,17 @@
+@use "../abstracts" as *;
+
+:is(h1, h2, h3, h4) {
+  /* Use a semantic variable with a sensible fallback */
+  line-height: var(--leading-tight, 1.1);
+  text-wrap: balance;
+}
+
+:is(h4, h5, h6) {
+  font-size: var(--fs-step-3);
+}
+
+p,
+li {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}

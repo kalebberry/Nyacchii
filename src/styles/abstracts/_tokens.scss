@@ -1,0 +1,34 @@
+@use "sass:map";
+@use "colors" as *;
+@use "typography" as *;
+@use "font-sizes" as *;
+@use "space-sizes" as *;
+
+/* Themne */
+$active-theme: $light;
+
+/* Layout Tokens */
+
+$container-min-margin-inline: map.get($space, 8);
+$container-max-width-narrow: 45rem;
+$container-max-width: 65rem;
+$container-max-width-wide: 100rem;
+
+$section-padding-block: map.get($space, 48);
+$gap-width-default: map.get($space, 16);
+
+$button-border-radius: 0.3em;
+$button-padding-inline: 1.875rem;
+$button-padding-block: 0.688rem;
+$font-text-default: $ff-fira-sans;
+$font-text-header: $ff-pt-serif;
+$font-text-weight-default: 300;
+$font-text-weight-header: 400;
+
+$font-text-width-default: 60ch;
+
+$body-font-family: $ff-fira-sans;
+$body-line-height: 1.7;
+$body-font-weight: $font-fira-sans-light;
+
+$header-max-text-width: 25ch;

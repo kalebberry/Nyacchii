@@ -1,41 +1,24 @@
 {
-  "name": "project-minami",
-  "version": "1.0.0",
-  "description": "Portfolio Website for Nyacchii",
-  "main": "index.js",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.36",
-    "@fortawesome/free-brands-svg-icons": "^5.15.4",
-    "@fortawesome/free-regular-svg-icons": "^5.15.4",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.16",
-    "contentful": "^9.3.6",
-    "eslint-config-next": "^14.1.0",
-    "framer-motion": "^6.5.1",
-    "fslightbox-react": "^1.6.2-2",
-    "gsap": "^3.12.5",
-    "motion": "^10.10.0",
-    "next": "^14.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-transition-group": "^4.4.2",
-    "sass": "^1.75.0",
-    "styled-components": "^5.3.5"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sorumeiji/project-minami-v2.git"
-  },
-  "author": "Kaleb Berry",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Sorumeiji/project-minami-v2/issues"
-  }
+	"name": "studio-eien-design-system",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "npm run tokens && astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"tokens": "node src/convert-tokens.js",
+		"scss": "sass src/styles/main.scss src/styles/main.css",
+		"scss:watch": "sass --watch src/styles/main.scss src/styles/main.css"
+	},
+	"dependencies": {
+		"@astrojs/vue": "^5.1.0",
+		"astro": "^5.13.2",
+		"gsap": "^3.13.0",
+		"pinia": "^3.0.3",
+		"vue": "^3.5.17"
+	},
+	"devDependencies": {
+		"sass": "^1.89.2"
+	}
 }
