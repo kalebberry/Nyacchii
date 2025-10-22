@@ -22,4 +22,51 @@ const { description } = Astro.props;
 	<body>
 		<slot />
 	</body>
+	<script>
+		import gsap from 'gsap';
+		import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+		gsap.registerPlugin(ScrollTrigger);
+
+		document.addEventListener('DOMContentLoaded', () => {
+			// --- 1. Hero Entrance Animation ---
+			const hero = document.querySelector('.hero--bw');
+			if (hero) {
+				const heroTl = gsap.timeline({
+					defaults: { duration: 0.9, ease: 'power3.out', opacity: 0, y: 20 },
+				});
+
+				heroTl
+					.from(hero.querySelector('h1'), {})
+					.from(hero.querySelector('p'), {}, '-=0.6')
+					.from(hero.querySelector('nav'), {}, '-=0.6')
+					.from(
+						hero.querySelectorAll('.poster-grid .poster'),
+						{ stagger: 0.1, scale: 0.95 },
+						'-=0.7'
+					);
+			}
+
+			// --- 2. Staggered Animation for All Content Sections on Scroll ---
+			const animatedSections = gsap.utils.toArray('section[id]');
+
+			animatedSections.forEach((section) => {
+				// Select all direct children or specific elements you want to animate
+				const elementsToAnimate = gsap.utils.toArray(section.children);
+
+				gsap.from(elementsToAnimate, {
+					y: 20,
+					opacity: 0,
+					duration: 0.9,
+					ease: 'power3.out',
+					stagger: 0.5,
+					scrollTrigger: {
+						trigger: section,
+						start: 'top 85%',
+						once: true,
+					},
+				});
+			});
+		});
+	</script>
 </html>
