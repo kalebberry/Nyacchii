@@ -1,26 +1,26 @@
 ---
-import Layout from '@/Layouts/DefaultLayout.astro';
-import tokens from '../design-tokens/tokens.json';
-import InteractiveCounter from '@/components/vue/landing/InteractiveCounter.vue';
+import Layout from "@/Layouts/DefaultLayout.astro";
+import tokens from "../design-tokens/tokens.json";
+import InteractiveCounter from "@/components/vue/landing/InteractiveCounter.vue";
 
-const title = 'Studio Eien — Web Design';
-const description = 'A clean, black‑and‑white anime landing page built with your CSS grid system.';
+const title = "Studio Eien — Web Design";
+const description = "A clean, black‑and‑white anime landing page built with your CSS grid system.";
 ---
 
 <Layout title={title} description={description}>
-	<main class='flow-large' style='--space:4rem'>
-		<section>
-			<div><img src='/public/images/mochi_logo.png' alt='mochi_logo' /></div>
-			<div>
-				<h2>Nyacchii</h2>
-				<p>Freelance illustrator and animator, mostly drawing emotes for streamers.</p>
-				<p>🇲🇽 Mexico [ENG/ESP]</p>
-			</div>
-			<div>
-				<button>Gallery</button>
-				<button>Pricing</button>
-				<button>Waitlist</button>
-			</div>
-		</section>
-	</main>
+  <main class="flow-large" style="--space:4rem">
+    <section>
+      <div><img src="/images/mochi_logo.png" alt="mochi_logo" /></div>
+      <div>
+        <h2>Nyacchii</h2>
+        <p>Freelance illustrator and animator, mostly drawing emotes for streamers.</p>
+        <p>🇲🇽 Mexico [ENG/ESP]</p>
+      </div>
+      <div>
+        <button>Gallery</button>
+        <button>Pricing</button>
+        <button>Waitlist</button>
+      </div>
+    </section>
+  </main>
 </Layout>
