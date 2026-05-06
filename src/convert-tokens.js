@@ -70,7 +70,7 @@ async function generateFontTokens(tokens) {
 		const interceptRem = interceptPx / BASE_SIZE;
 
 		const clamp = `clamp(${round(minRem)}rem, ${round(interceptRem)}rem + ${round(
-			slopeScoped
+			slopeScoped,
 		)}${SCOPE}, ${round(maxRem)}rem)`;
 		output += `  '${key}': ${clamp},\n`;
 	}
@@ -85,20 +85,19 @@ async function generateThemeTokens(tokens) {
 	const darkTheme = tokens.color?.dark || {};
 	let output = `// This file is auto-generated. Do not edit.\n\n`;
 
-	output += `:root {\n`;
-	output += `  color-scheme: light dark;\n`;
+	output += `[data-theme='light'] {\n`;
+	output += `  color-scheme: light;\n`;
 	for (const key in lightTheme) {
 		output += `  --${key}: ${lightTheme[key].value};\n`;
 	}
-	output += `}\n\n`;
+	output += `}\n`;
 
-	// Dark theme for OS preference
-	output += `@media (prefers-color-scheme: dark) {\n`;
-	output += `  :root {\n`;
+	// Dark theme via data attribute
+	output += `[data-theme='dark'] {\n`;
+	output += `  color-scheme: dark;\n`;
 	for (const key in darkTheme) {
-		output += `    --${key}: ${darkTheme[key].value};\n`;
+		output += `  --${key}: ${darkTheme[key].value};\n`;
 	}
-	output += `  }\n`;
 	output += `}\n`;
 
 	await fs.writeFile(THEME_OUTPUT_PATH, output);

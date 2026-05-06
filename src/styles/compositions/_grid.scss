@@ -1,4 +1,5 @@
 /* --- Grid System Configuration -------------------------------------- */
+@use "../abstracts" as *;
 @use "sass:math";
 
 $grid-max-cols: 12;
@@ -51,8 +52,7 @@ $__size-step: math.div($__size-range, $__col-range);
   gap: var(--gutter, 1rem);
   grid-auto-rows: minmax(min-content, auto);
 
-  &[data-cols],
-  &[data-layout] {
+  &[data-cols] {
     --grid-placement: auto-fit;
   }
 }
@@ -131,6 +131,7 @@ $__size-step: math.div($__size-range, $__col-range);
 .cq-card__content {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap; // Allow flex items to wrap to the next line
   gap: 0.5rem;
 }
 
@@ -192,11 +193,15 @@ $__size-step: math.div($__size-range, $__col-range);
 
 /* --- Masonry Grid ---------------------------------------------------- */
 .masonry-grid {
+  display: block; // Ensure it's not inheriting grid/flex
   column-count: var(--masonry-cols, 3);
   column-gap: var(--gutter, 1rem);
+  width: 100%;
 
   > * {
-    break-inside: avoid;
+    break-inside: avoid-column;
+    display: inline-block; // Better compatibility for column wrapping
+    width: 100%;
     margin-bottom: var(--gutter, 1rem);
   }
 }
@@ -209,14 +214,51 @@ $__size-step: math.div($__size-range, $__col-range);
       --masonry-cols: 1;
     }
   }
-  @container (40rem <= width <= 70rem) {
+  @container (min-width: 40rem) and (max-width: 70rem) {
     .masonry-grid {
       --masonry-cols: 2;
     }
   }
-  @container (min-width: 70rem) {
+  @container (min-width: 70.01rem) {
     .masonry-grid {
       --masonry-cols: 3;
     }
+  }
+}
+
+/* --- The Reel (Horizontal Overflow) --------------------------------- */
+.reel {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  gap: var(--gutter, 1rem);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > * {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: var(--reel-item-width, 18rem);
+  }
+}
+
+/* --- The Frame (Aspect Ratio) --------------------------------------- */
+.frame {
+  aspect-ratio: var(--n, 1) / var(--d, 1);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > img,
+  > video {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
   }
 }
